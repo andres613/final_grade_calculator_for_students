@@ -2,6 +2,7 @@ const btnCalculate = document.getElementById('btn-calculate');
 const inputFirstNote = document.querySelector('#first-note');
 const inputSecondNote = document.querySelector('#second-note');
 const inputThirdNote = document.querySelector('#third-note');
+const userMessage = document.querySelector('.user-message');
 
 
 const calculate = () => {
@@ -15,13 +16,13 @@ const calculate = () => {
         let preliminarNote = calculatePreliminarNote(parseFloat(notes[0]), parseFloat(notes[1]), parseFloat(notes[2]));
 
         if(thirdNoteIsSetted){
-            messageToDisplay = userMessage('thirdNoteIsSetted', preliminarNote);
+            messageToDisplay = getUserMessage('thirdNoteIsSetted', preliminarNote);
         } else {
             let calculatedNotes = getCalculatedNote(preliminarNote)
-            messageToDisplay = userMessage(thirdNoteIsSetted, calculatedNotes);
+            messageToDisplay = getUserMessage(thirdNoteIsSetted, calculatedNotes);
         }
     } else {
-        messageToDisplay = userMessage("errorValidating");
+        messageToDisplay = getUserMessage("errorValidating");
     }
 
     displayUserMessage(messageToDisplay);
@@ -58,12 +59,12 @@ const getCalculatedNote = preliminarNote => {
 };
 
 
-const userMessage = (option, calculatedNotes) => {
+const getUserMessage = (option, calculatedNotes) => {
     let message = '';
 
     switch (option) {
         case "errorValidating":
-            message = 'Debe ingresar al menos las dos primeras notas para determinar su estado académico \nRecuerde que deben ser valores entre 0 y 5';
+            message = `Debe ingresar al menos las dos primeras notas para determinar su estado académico <br /> Recuerde que deben ser valores entre 0 y 5`;
             break;
 
         case 'thirdNoteIsSetted':
@@ -75,14 +76,14 @@ const userMessage = (option, calculatedNotes) => {
                 return 'Ha perdido la materiaaaaa';
             
             if (calculatedNotes[0] < 0){
-                message += `Ya es candidato a recuperación independientemente del resultado del próximo exámen\n`;
+                message += `Ya es candidato a recuperación independientemente del resultado del próximo exámen. <br />`;
             } else {
-                message += `Para recuperar necesita: ${calculatedNotes[0]}\n`
+                message += `Para recuperar necesita: ${Math.floor(calculatedNotes[0] * 100) / 100}. <br />`
             }
 
             message += 
-                `Para solo pasar la materia necesita: ${calculatedNotes[1]}\n` +
-                `Para ganar la materia con honores, necesita una nota igual o superior a ${calculatedNotes[2]}`
+                `Para solo pasar la materia necesita: ${Math.floor(calculatedNotes[1] * 100) / 100}. <br />` +
+                `Para ganar la materia con honores, necesita una nota igual o superior a ${Math.floor(calculatedNotes[2] * 100) / 100}.`
             break;
     }
 
@@ -90,6 +91,6 @@ const userMessage = (option, calculatedNotes) => {
 };
 
 
-const displayUserMessage = message => alert(message);
+const displayUserMessage = message => userMessage.innerHTML = message;
 
 btnCalculate.addEventListener('click', calculate);
