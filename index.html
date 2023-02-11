@@ -4,19 +4,24 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=, initial-scale=1.0">
         <title>Note Calculator</title>
+        <link rel="stylesheet" href="./style.css">
     </head>
     <body>
         <main>
-            Ingrese la primer nota: <input id="first-note" type="number">
-            <br>
-            <br>
-            Ingrese la segunda nota: <input id="second-note" type="number">
-            <br>
-            <br>
-            Ingrese la tercer nota: <input id="third-note" type="number">
-            <br>
-            <br>
-            <button id="btn-calculate">Calcular</button>
+            <h1 class="title">Calculadora de notas</h1>
+            <div class="input-container">
+                Ingrese la primer nota: <input id="first-note" type="number">
+                <br>
+                <br>
+                Ingrese la segunda nota: <input id="second-note" type="number">
+                <br>
+                <br>
+                Ingrese la tercer nota: <input id="third-note" type="number">
+                <br>
+                <br>
+                <button id="btn-calculate">Calcular</button>
+            </div>
+            <h3 class="user-message"></h3>
         </main>
         <script src="./noteCalculator.js"></script>
     </body>
